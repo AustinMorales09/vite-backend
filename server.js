@@ -8,7 +8,13 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+const corsOptions = {
+    origin: 'https://vite-deploy-ahyr.onrender.com',
+    methods: 'GET,POST,PUT,DELETE',
+    allowedHeaders: 'Content-Type, Authorization'
+}
+app.use(cors(corsOptions));
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
@@ -36,7 +42,7 @@ app.get("/pets", async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
-
+// comment
 // Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
